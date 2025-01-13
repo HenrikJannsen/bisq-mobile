@@ -28,7 +28,12 @@ class BuyerState4Presenter(
 
     fun onCloseTrade() {
         jobs.add(CoroutineScope(BackgroundDispatcher).launch {
-            tradesServiceFacade.closeTrade()
+            val result = tradesServiceFacade.closeTrade()
+            when {
+                // TODO review
+                result.isFailure -> navigateBack()
+                result.isSuccess -> navigateBack()
+            }
         })
     }
 
